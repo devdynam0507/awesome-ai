@@ -1,112 +1,129 @@
 import Image from "next/image";
+import Navbar from "./navbar";
+
+function EmailBox() {
+  return (
+    <div className="flex flex-col p-4 bg-blue-50 mt-4 rounded-md">
+      <p className="text-xl font-bold sm:text-base">👋 새로운 AI 제품 알림을 받아보실래요?</p>
+      <p className="mt-2 text-sm sm:text-xs">AwesomeAI 팀이 매일 AI 제품을 추적하고 새로운 제품이 올라오면 메일로 알려드릴게요!</p>
+      <div className="mt-6 flex flex-row items-center gap-4">
+        <input
+          type="email"
+          id="email"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/5 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="john.doe@company.com"
+          required
+        />
+        <div className="pb-2 utems-center jusitfy-center">
+          <button
+            className="mt-2 shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-semibold text-sm py-2 px-4 rounded align-top"
+            type="button">
+            구독하기
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Product({ labels, productName, href, description, like, img }) {
+  return (
+    <a href={href} target="_blank">
+      <li className="flex justify-between gap-x-6 py-5 cursor-pointer border-b-gray-200 border-b">
+        <div className="flex min-w-0 gap-x-4 max-h-max">
+          <div className="flex flex-row items-center">
+            <img
+              width={48}
+              height={48}
+              style={{
+                minWidth: 48,
+                minHeight: 48
+              }}
+              className="flex-none rounded-full bg-gray-50"
+              src={img}
+              alt=""
+            />
+          </div>
+          <div className="min-w-0 flex-auto">
+            <p className="text-sm font-semibold leading-6 text-gray-900">{productName}</p>
+            <p className="mt-1 text-xs leading-5 text-gray-500 break-all">{description}</p>
+
+            <div className="flex flex-row mt-2 items-center gap-2">
+              {labels.map((labelProps, index) => {
+                return (
+                  <div key={index} className={`bg-${labelProps.color} w-fit p-1 rounded`}>
+                    <p className="text-xs font-semibold text-white">{labelProps.label}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <div className="hidden shrink-0 flex flex-row items-end justify-center">
+          <div className="w-fit p-1.5 rounded border border-zinc-200 flex flex-row gap-2 items-center">
+            <p className="">👍</p>
+            <p className="text-sm">{like}</p>
+          </div>
+        </div>
+      </li>
+    </a>
+  );
+}
+
+function ProductList() {
+  return (
+    <ul role="list" className="divide-y divide-gray-100">
+      <Product
+        like={1}
+        img={'https://files.oaiusercontent.com/file-gk3ACPm7Tvy5DHe5aE9fqJ0W?se=2123-12-19T11%3A10%3A14Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D1209600%2C%20immutable&rscd=attachment%3B%20filename%3DFrame%2520612.png&sig=dTPAPU4773Mz4PPaC6kCzsTf7ZiFgLSs/z3%2B3uGxkqY%3D'}
+        href={"https://chat.openai.com/g/g-kZ0eYXlJe-scholar-gpt"}
+        productName={"Scholar GPT"}
+        description={"Enhance research with 200M+ resources and built-in critical reading skills. Access Google Scholar, PubMed, JSTOR, Arxiv, and more, effortlessly."}
+        labels={[
+          {
+            color: "black",
+            label: "Chat GPT",
+          },
+          {
+            color: "lime-600",
+            label: "생산성",
+          },
+        ]}
+      />
+
+      <Product
+        like={'100+'}
+        img={'https://files.oaiusercontent.com/file-QW7YvSgT3rmHt0Iy06gizKqV?se=2123-12-14T22%3A32%3A32Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D1209600%2C%20immutable&rscd=attachment%3B%20filename%3DDALL%25C2%25B7E%25202024-01-08%252005.17.36%2520-%2520Cute%2520and%2520adorable%2520little%2520dragon%2520dancing%2520with%2520fireworks%252C%2520designed%2520in%2520the%2520style%2520of%2520watercolor%2520clipart%2520with%2520the%2520phrase%2520_2024%2520Happy%2520New%2520Year_%2520written%2520in%2520c.png&sig=gXSIsqA69Y3/BJnVvGx%2Ba1%2BQVhOWbV9sUy/gFnKdypI%3D'}
+        href={"https://chat.openai.com/g/g-xoFFkpsLi-supercute-greeting-card"}
+        productName={"Supercute Greeting Card"}
+        description={"Supercute Greeting Card Generator (Easy to use)"}
+        labels={[
+          {
+            color: "black",
+            label: "Chat GPT",
+          },
+          {
+            color: "lime-600",
+            label: "생산성",
+          },
+        ]}
+      />
+    </ul>
+  );
+}
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="flex min-h-screen flex-col bg-white">
+      <Navbar />
+      <div className="flex flex-col w-full items-center justify-center">
+        <div className="flex flex-col w-3/5 sm:w-4/5 justify-center">
+          <EmailBox />
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div className="w-3/5 sm:w-4/5 mt-10">
+          <h1 className="text-xl font-bold">핫한 AI 제품 목록</h1>
+          <ProductList />
+        </div>
       </div>
     </main>
   );
