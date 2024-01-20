@@ -11,7 +11,7 @@ export default function Navbar() {
             clipRule="evenodd"
           />
         </svg>
-        <p className="text-lg font-semibold">AwesomeAI</p>
+        <p className="text-lg font-semibold text-black">AwesomeAI</p>
       </div>
     </nav>
   );
