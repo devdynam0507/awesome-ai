@@ -1,11 +1,11 @@
-import Image from "next/image";
 import Navbar from "./navbar";
 
 function EmailBox() {
   return (
     <div className="flex flex-col p-4 bg-blue-50 mt-4 rounded-md">
       <p className="text-xl font-bold sm:text-base text-black">👋 새로운 AI 제품 알림을 받아보실래요?</p>
-      <p className="mt-2 text-sm sm:text-xs text-black">AwesomeAI 팀이 매일 AI 제품을 추적하고 새로운 제품이 올라오면 메일로 알려드릴게요!</p>
+      <p className="mt-2 text-sm sm:text-xs text-black">AwesomeAI 팀은 매일 AI 제품을 추적하고 번역합니다.</p>
+      <p className="mt-2 text-sm sm:text-xs text-black">새로운 제품을 찾으면 메일로 제일 먼저 알려드릴게요!</p>
       <div className="mt-6 flex flex-row items-center gap-4">
         <input
           type="email"
@@ -18,7 +18,7 @@ function EmailBox() {
           <button
             className="mt-2 shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-semibold text-sm py-2 px-4 rounded align-top"
             type="button">
-            구독하기
+            알림받기
           </button>
         </div>
       </div>
